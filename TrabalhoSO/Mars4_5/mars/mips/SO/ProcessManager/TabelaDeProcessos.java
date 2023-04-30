@@ -12,6 +12,13 @@ public class TabelaDeProcessos {
         this.processosProntos = new ArrayList<>();
         this.processoEmExecucao = null;
     }
+    
+    public static void criarProcesso(int enderecoInicio) {
+    	PCB pcb = new PCB(enderecoInicio);
+    	processosProntos.add(pcb);
+    }
+    
+    
 
     public ArrayList<PCB> getProcessosProntos() {
         return processosProntos;

@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import mars.mips.SO.ProcessManager.PCB;
+import mars.mips.SO.ProcessManager.Escalonador;
+
 public class TabelaDeProcessos {
     private ArrayList<PCB> processosProntos;
     private PCB processoEmExecucao;
@@ -16,6 +19,7 @@ public class TabelaDeProcessos {
     public static void criarProcesso(int enderecoInicio) {
     	PCB pcb = new PCB(enderecoInicio);
     	processosProntos.add(pcb);
+    	Escalonador.escalonar();
     }
     
     
@@ -25,7 +29,8 @@ public class TabelaDeProcessos {
     }
 
     public void setProcessosProntos(ArrayList<PCB> processosProntos) {
-        this.processosProntos = processosProntos;
+        pcb.setProcessState("Execução");
+        processosEmexecucao = pcb;
     }
 
     public PCB getProcessoEmExecucao() {
@@ -37,6 +42,9 @@ public class TabelaDeProcessos {
     }
 
     public void adicionarProcessoPronto(PCB processo) {
+    	if(!pcb.getProcessState().equals("Pronto")) {
+    		pcb.setProcessState("Pronto");
+    	}
         this.processosProntos.add(processo);
     }
 

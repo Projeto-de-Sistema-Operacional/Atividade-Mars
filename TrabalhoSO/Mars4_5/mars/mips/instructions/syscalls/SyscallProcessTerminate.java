@@ -1,6 +1,8 @@
 package mars.mips.instructions.syscalls;
 import mars.mips.SO.ProcessManager.PCB;
 import mars.mips.SO.ProcessManager.TabelaDeProcessos;
+import mars.ProcessingException;
+import mars.ProgramStatement;
 import mars.mips.SO.ProcessManager.Escalonador;
 
 public class SyscallProcessTerminate extends AbstractSyscall{
@@ -8,10 +10,8 @@ public class SyscallProcessTerminate extends AbstractSyscall{
 		super(62, "SyscallProcessTerminate");
 	}
 	
-	public void simulate(ProcessStatement statement) throws ProcessingException{
-		PCB pcb = TabelaDeProcessos.getProcessoEmExecucao();
-		
-		Escalonador.escalonar();
-		TabelaDeProcessos.removerProcessoPronto(pcb);
+	@Override
+	public void simulate(ProgramStatement statement) throws ProcessingException {
+		TabelaDeProcessos.RemoveProcess();
 	}
 }

@@ -1,31 +1,28 @@
  package mars.mips.SO.ProcessManager;
- import mars.mips.hardware.RegisterFile;
+ import java.util.Random;
+
+import mars.mips.hardware.RegisterFile;
 
 public class PCB {
 	
-	private String programStartAddress;
+	private int enderecoInicio; 
     private int pid;
     private String processState;
     private int[] registerValues;
+    private int numeroDeRegistradores = 34;
 	
 	public void copyRegistersToPCB() {
-        for (int i = 0; i < RegisterFile.NUM_REGISTERS; i++) {
-            this.registerValues[i] = RegisterFile.getValue(i);
+        for (int i = 0; i < numeroDeRegistradores; i++) {
+           if( i>=32 ) registerValues[i] = RegisterFile.getValue(i + 1);
+           else registerValues[i] = RegisterFile.getValue(i);
         }
     }
 
     public void copyPCBToRegisters() {
-        for (int i = 0; i < RegisterFile.NUM_REGISTERS; i++) {
-            RegisterFile.updateRegister(i, this.registerValues[i]);
-        }
-    }
-    
-    public String getProgramStartAddress() {
-        return programStartAddress;
-    }
-
-    public void setProgramStartAddress(String programStartAddress) {
-        this.programStartAddress = programStartAddress;
+        for (int i = 0; i < numeroDeRegistradores; i++) {
+            if( i>=32 ) registerValues[i] = RegisterFile.updateRegister(i + 1, registerValues[i]);
+            else RegisterFile.updateRegister(i, registerValues[i]);
+         }
     }
 
     public int getPid() {
@@ -47,14 +44,23 @@ public class PCB {
     public int[] getRegisterValues() {
         return registerValues;
     }
-	
-    public PCB(String programStartAddress, int pid, String processState) {
-        this.programStartAddress = programStartAddress;
-        this.pid = pid;
-        this.processState = processState;
-        this.registerValues = new int[RegisterFile.NUM_REGISTERS];
-        for (int i = 0; i < RegisterFile.NUM_REGISTERS; i++) {
-            this.registerValues[i] = RegisterFile.getValue(i);
-        }
+
+    public void setRegisterValues(int[] registerValues) {
+        this.registerValues  = registerValues; 
+    }
+
+    public int getEndecoInicio(){
+        return enderecoInicio;
+    }
+
+    public void setEnderecoInicio(int enderecoInicio){
+        this.enderecoInicio = enderecoInicio;
+    }	
+
+    public PCB(int enederecoInicio) {
+        registerValues = new int[numeroDeRegistradores];
+        setEnderecoInicio(enederecoInicio);
+        setProcessState("Pronto");
+        pid = new Random().nextInt(Integer.MAX_VALUE);
     }
 }

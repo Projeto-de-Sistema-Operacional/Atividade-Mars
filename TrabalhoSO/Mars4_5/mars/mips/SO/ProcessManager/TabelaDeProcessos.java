@@ -8,55 +8,32 @@ import mars.mips.SO.ProcessManager.PCB;
 import mars.mips.SO.ProcessManager.Escalonador;
 
 public class TabelaDeProcessos {
-    private ArrayList<PCB> processosProntos;
-    private PCB processoEmExecucao;
+    private static Queue<PCB> filaProcessos = new LinkedList<PCB>();
 
-    public TabelaDeProcessos() {
-        this.processosProntos = new ArrayList<>();
-        this.processoEmExecucao = null;
-    }
-    
-    public static void criarProcesso(int enderecoInicio) {
-    	PCB pcb = new PCB(enderecoInicio);
-    	processosProntos.add(pcb);
-    	Escalonador.escalonar();
-    }
-    
-    
+    public static void adicionarProcesso(PCB pcb){
+        if(filaProcessos.size() == 0){
+            pcb.setProcessState("Em Execução");
+        }else pcb.setProcessState("Pronto");
 
-    public ArrayList<PCB> getProcessosProntos() {
-        return processosProntos;
+        filaProcessos.add(pcb);
     }
 
-    public void setProcessosProntos(ArrayList<PCB> processosProntos) {
-        pcb.setProcessState("Execução");
-        processosEmexecucao = pcb;
+    public static void criarProcesso(int enderecoInicio){
+        PCB pcb = new PCB(enderecoInicio);
+        adicionarProcesso(pcb);
     }
 
-    public PCB getProcessoEmExecucao() {
-        return processoEmExecucao;
+    public static PCB PeekProcess(){
+        return filaProcessos.peek();
     }
 
-    public void setProcessoEmExecucao(PCB processoEmExecucao) {
-        this.processoEmExecucao = processoEmExecucao;
-    }
-
-    public void adicionarProcessoPronto(PCB processo) {
-    	if(!pcb.getProcessState().equals("Pronto")) {
-    		pcb.setProcessState("Pronto");
-    	}
-        this.processosProntos.add(processo);
-    }
-
-    public PCB removerProcessoPronto() {
-        if (this.processosProntos.isEmpty()) {
-            return null;
-        } else {
-            return this.processosProntos.remove(0);
+    public static PCB RemoveProcess(){
+        PCB processoRemovido = filaProcessos.remove();
+        if(filaProcessos.size() != 0){
+            PCB processoTopo = PeekProcess();
+            processoTopo.setProcessState("Em Execução");
         }
-    }
 
-    public boolean existeProcessoPronto() {
-        return !this.processosProntos.isEmpty();
+        return processoRemovido;
     }
 }

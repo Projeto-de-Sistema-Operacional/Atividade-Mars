@@ -11,10 +11,6 @@ public class SyscallFork extends AbstractSyscall {
 		super(60, "SyscallFork");
 	}
 	public void simulate(ProgramStatement statement) throws ProcessingException{
-		try{
-			TabelaDeProcessos.criarProcesso(RegisterFile.getValue(4));
-		} catch (AddressErrorException e) {
-			throw new ProcessingException(statement, e);
-		}
+		TabelaDeProcessos.criarProcesso(RegisterFile.getValue(4));
 	}
 }

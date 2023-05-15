@@ -19,7 +19,7 @@ import mars.simulator.Exceptions;
 */
 
 /*
- * Didier Teifreto LIFC Université de franche-Comté www.lifc.univ-fcomte.fr/~teifreto
+ * Didier Teifreto LIFC Universitï¿½ de franche-Comtï¿½ www.lifc.univ-fcomte.fr/~teifreto
  * didier.teifreto@univ-fcomte.fr
  */
 public class DigitalLabSim extends AbstractMarsToolAndApplication {

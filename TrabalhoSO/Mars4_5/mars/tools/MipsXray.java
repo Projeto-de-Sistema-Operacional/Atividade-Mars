@@ -130,7 +130,7 @@ public class MipsXray extends AbstractMarsToolAndApplication{
              						"\n"+
 										"To see the datapath of register bank and control units click inside the functional unit.\n\n" +
              						"Version 2.0\n" + 
-             						"Developed by Márcio Roberto, Guilherme Sales, Fabrício Vivas, Flávio Cardeal and Fábio Lúcio\n" +
+             						"Developed by Mï¿½rcio Roberto, Guilherme Sales, Fabrï¿½cio Vivas, Flï¿½vio Cardeal and Fï¿½bio Lï¿½cio\n" +
              						"Contact Marcio Roberto at marcio.rdaraujo@gmail.com with questions or comments.\n"
              						;
           JButton help = new JButton("Help");

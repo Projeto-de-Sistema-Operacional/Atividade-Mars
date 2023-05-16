@@ -41,6 +41,10 @@ public class PCB {
         this.processState = processState;
     }
 
+    public int getNumeroDeRegistradores(){
+        return numeroDeRegistradores;
+    }
+
     public int[] getRegisterValues() {
         return registerValues;
     }
